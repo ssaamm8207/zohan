@@ -1,0 +1,720 @@
+{
+  "last_node_id": 39,
+  "last_link_id": 42,
+  "nodes": [
+    {
+      "id": 12,
+      "type": "BasicGuider",
+      "pos": {
+        "0": 1548.0982666015625,
+        "1": 494.7315979003906
+      },
+      "size": {
+        "0": 241.79998779296875,
+        "1": 46
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 33,
+          "label": "模型"
+        },
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 16,
+          "label": "条件"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "GUIDER",
+          "type": "GUIDER",
+          "links": [
+            11
+          ],
+          "shape": 3,
+          "label": "引导"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicGuider"
+      },
+      "widgets_values": [],
+      "_widget_cache_map": {}
+    },
+    {
+      "id": 20,
+      "type": "VAEDecode",
+      "pos": {
+        "0": 1887.0985107421875,
+        "1": 363.7315368652344
+      },
+      "size": {
+        "0": 209.79441833496094,
+        "1": 46
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 22,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 23,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            25
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": [],
+      "_widget_cache_map": {}
+    },
+    {
+      "id": 13,
+      "type": "KSamplerSelect",
+      "pos": {
+        "0": 1537.8995361328125,
+        "1": 587.9986572265625
+      },
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "SAMPLER",
+          "type": "SAMPLER",
+          "links": [
+            12
+          ],
+          "shape": 3,
+          "label": "采样器"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSamplerSelect"
+      },
+      "widgets_values": [
+        "euler"
+      ],
+      "_widget_cache_map": {}
+    },
+    {
+      "id": 15,
+      "type": "UNETLoader",
+      "pos": {
+        "0": 1122.8992919921875,
+        "1": 326.99859619140625
+      },
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            42
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "基础算法_F.1",
+        "fp8_e4m3fn"
+      ],
+      "_widget_cache_map": {
+        "基础算法_F.1": {
+          "name": "基础算法_F.1",
+          "baseType": 19,
+          "value": "412b427ddb674b4dbab9e5abd5ae6057"
+        }
+      }
+    },
+    {
+      "id": 14,
+      "type": "BasicScheduler",
+      "pos": {
+        "0": 1542.0982666015625,
+        "1": 700.7315673828125
+      },
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 34,
+          "label": "模型"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "SIGMAS",
+          "type": "SIGMAS",
+          "links": [
+            13
+          ],
+          "shape": 3,
+          "label": "Sigmas"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicScheduler"
+      },
+      "widgets_values": [
+        "normal",
+        30,
+        1
+      ],
+      "_widget_cache_map": {}
+    },
+    {
+      "id": 29,
+      "type": "LoraLoaderModelOnly",
+      "pos": {
+        "0": 1120.8751220703125,
+        "1": 476.9471130371094
+      },
+      "size": {
+        "0": 312.80828857421875,
+        "1": 82
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 42,
+          "label": "模型"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            33,
+            34
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoraLoaderModelOnly"
+      },
+      "widgets_values": [
+        "QY_虎斑猫橘猫-抖音短视频爆款_V1.0",
+        0.8
+      ],
+      "_widget_cache_map": {
+        "QM-治愈毛绒玩偶_电商设计，品牌IP，海报创意_V1.0": {
+          "name": "QM-治愈毛绒玩偶_电商设计，品牌IP，海报创意_V1.0",
+          "baseType": 19,
+          "value": "d96089b89daa45f4a633e4be169833b6"
+        },
+        "QY_F.1-新中式旗袍女孩新年摄影_V1.0": {
+          "name": "QY_F.1-新中式旗袍女孩新年摄影_V1.0",
+          "baseType": 19,
+          "value": "0f2e51537e9f4f148da0d1d933f9e946"
+        },
+        "QY_虎斑猫橘猫-抖音短视频爆款_V1.0": {
+          "name": "QY_虎斑猫橘猫-抖音短视频爆款_V1.0",
+          "baseType": 19,
+          "value": "305f3318294a454a83e7833023da0e81"
+        }
+      }
+    },
+    {
+      "id": 19,
+      "type": "VAELoader",
+      "pos": {
+        "0": 1107.8751220703125,
+        "1": 779.9473876953125
+      },
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            23
+          ],
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "ae.sft"
+      ],
+      "_widget_cache_map": {}
+    },
+    {
+      "id": 10,
+      "type": "SamplerCustomAdvanced",
+      "pos": {
+        "0": 1896.87548828125,
+        "1": 485.9471130371094
+      },
+      "size": {
+        "0": 355.20001220703125,
+        "1": 326
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "noise",
+          "type": "NOISE",
+          "link": 10,
+          "label": "噪波生成"
+        },
+        {
+          "name": "guider",
+          "type": "GUIDER",
+          "link": 11,
+          "label": "引导"
+        },
+        {
+          "name": "sampler",
+          "type": "SAMPLER",
+          "link": 12,
+          "label": "采样器"
+        },
+        {
+          "name": "sigmas",
+          "type": "SIGMAS",
+          "link": 13,
+          "label": "Sigmas"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 24,
+          "label": "Latent"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "LATENT",
+          "links": [
+            22
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "输出"
+        },
+        {
+          "name": "denoised_output",
+          "type": "LATENT",
+          "links": null,
+          "shape": 3,
+          "label": "降噪输出"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SamplerCustomAdvanced"
+      },
+      "widgets_values": [],
+      "_widget_cache_map": {}
+    },
+    {
+      "id": 21,
+      "type": "EmptyLatentImage",
+      "pos": {
+        "0": 1102.8751220703125,
+        "1": 911.9471435546875
+      },
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            24
+          ],
+          "shape": 3,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1024,
+        1536,
+        1
+      ],
+      "_widget_cache_map": {}
+    },
+    {
+      "id": 11,
+      "type": "RandomNoise",
+      "pos": {
+        "0": 1520.0982666015625,
+        "1": 359.7315368652344
+      },
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "NOISE",
+          "type": "NOISE",
+          "links": [
+            10
+          ],
+          "shape": 3,
+          "label": "噪波生成"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RandomNoise"
+      },
+      "widgets_values": [
+        1081203505307252,
+        "randomize"
+      ],
+      "_widget_cache_map": {}
+    },
+    {
+      "id": 17,
+      "type": "DualCLIPLoader",
+      "pos": {
+        "0": 1110.8751220703125,
+        "1": 617.947021484375
+      },
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            17
+          ],
+          "shape": 3,
+          "label": "CLIP"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DualCLIPLoader"
+      },
+      "widgets_values": [
+        "t5xxl_fp8_e4m3fn",
+        "clip_l",
+        "flux"
+      ],
+      "_widget_cache_map": {}
+    },
+    {
+      "id": 22,
+      "type": "SaveImage",
+      "pos": {
+        "0": 2347.39990234375,
+        "1": 330.7068786621094
+      },
+      "size": {
+        "0": 533.8889770507812,
+        "1": 596.616943359375
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 25,
+          "label": "图像"
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "ComfyUI"
+      ],
+      "_widget_cache_map": {}
+    },
+    {
+      "id": 16,
+      "type": "CLIPTextEncode",
+      "pos": {
+        "0": 1489.8753662109375,
+        "1": 849.9473876953125
+      },
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 17,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            16
+          ],
+          "shape": 3,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "Fat cat, A chubby orange tabby cat with a plump physique and a cute, slightly annoyed expression wears a blue motorcycle helmet and rides a small black scooter. The cat's paws grip the handlebars, and it holds a wicker basket containing fresh vegetables, including eggplants, tomatoes, and lettuce. The background features a blurred outdoor setting with greenery and a paved road. The image is a high-quality photograph."
+      ],
+      "_widget_cache_map": {}
+    }
+  ],
+  "links": [
+    [
+      10,
+      11,
+      0,
+      10,
+      0,
+      "NOISE"
+    ],
+    [
+      11,
+      12,
+      0,
+      10,
+      1,
+      "GUIDER"
+    ],
+    [
+      12,
+      13,
+      0,
+      10,
+      2,
+      "SAMPLER"
+    ],
+    [
+      13,
+      14,
+      0,
+      10,
+      3,
+      "SIGMAS"
+    ],
+    [
+      16,
+      16,
+      0,
+      12,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      17,
+      17,
+      0,
+      16,
+      0,
+      "CLIP"
+    ],
+    [
+      22,
+      10,
+      0,
+      20,
+      0,
+      "LATENT"
+    ],
+    [
+      23,
+      19,
+      0,
+      20,
+      1,
+      "VAE"
+    ],
+    [
+      24,
+      21,
+      0,
+      10,
+      4,
+      "LATENT"
+    ],
+    [
+      25,
+      20,
+      0,
+      22,
+      0,
+      "IMAGE"
+    ],
+    [
+      33,
+      29,
+      0,
+      12,
+      0,
+      "MODEL"
+    ],
+    [
+      34,
+      29,
+      0,
+      14,
+      0,
+      "MODEL"
+    ],
+    [
+      42,
+      15,
+      0,
+      29,
+      0,
+      "MODEL"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "一键生成虎斑猫橘猫-抖音短视频爆款",
+      "bounding": [
+        1033,
+        255,
+        1900,
+        851
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.45,
+      "offset": [
+        974.6750193447206,
+        256.40187343790853
+      ]
+    },
+    "workspace_info": {
+      "id": "Z1G3Ee8hdOA_nL1SRBsdL",
+      "saveLock": false,
+      "cloudID": null,
+      "coverMediaPath": null
+    },
+    "node_versions": {
+      "comfy-core": "v0.3.10"
+    },
+    "0246.VERSION": [
+      0,
+      0,
+      4
+    ]
+  },
+  "version": 0.4,
+  "widget_idx_map": {
+    "11": {
+      "noise_seed": 0
+    },
+    "13": {
+      "sampler_name": 0
+    },
+    "14": {
+      "scheduler": 0
+    }
+  },
+  "seed_widgets": {
+    "11": 0
+  }
+}
